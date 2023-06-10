@@ -36,12 +36,51 @@ const Report = () => {
     },
   })
 
+  const bioData = value?.[id || '']
 
+  /**reportData = {
+   * name -
+   * age -
+   *
+   *
+cadRad:
+calcium:
+  stenosisCount:
+  maximumStenosis:
+  percentAtheromaVolume
+  totalPlaqueVolume:
+  severeStenosis
+  moderateStenosis
+  lesionsCountRca
+  maxiumStenosisRca
+  minimumStenosisRca
+  plaqueVolumeRca:
+  lesionsCountLmca
+  maxiumStenosisLmca
+  minimumStenosisLmca
+  plaqueVolumeLmca:
+
+
+  pastHeartAttack -
+  hasStents -
+
+  }**/
   /// todo : 
+
   useEffect(() => {
-    // reportMutation.mutate("\ngenerate a real world well detailed CCTA report from these findings of a preson \ntotal plaque: 567cubic-mm\npercent atheroma volumn : 21%\nsevere-stenosis: 4  \nmoderate stenosis: 2 \ncad-rad-score: 4 \n\nlesions-count-rca: 2  \nmaxium-stenosis-rca : 18 %\nminimum-stenosis-rca: 9% \nplaque-volume:200 cubic mm\n\nlesions-count-lmca: 3  \nmaxium-stenosis-rca : 58 %\nminimum-stenosis-rca: 49% \nplaque-volume: 367 cubic mm\n")
-    // treatementMutation.mutate("my patient have stenosis of 70% in LCA atery, and 50% stenosis in another artery, this patient in the past have 2 heart attacks, a stent in one artery,  drinks and smokes a lot, faces pain in left chest while running, recommed medication and treatment plan for this. Mention the medication in detail with amount and routine")
-  }, [])
+    if (bioData) {
+      const reportPrompt = `\ngenerate a real world well detailed CCTA report from these findings of a person  name ${bioData?.name || ''}, age ${bioData?.age || ''} \ntotal plaque Volume: ${bioData?.totalPlaqueVolume || ''}cubic-mm\npercent atheroma volume : ${bioData?.percentAtheromaVolume || ''}\nsevere stenosis: ${bioData?.severeStenosis || ''}  \nmoderate stenosis: ${bioData?.moderateStenosis || ''} \ncad rad score: ${bioData?.cadRad || ''} \n\nlesions count in rca: ${bioData?.lesionsCountRca || ''}  \nmaximum stenosis in rca : ${bioData?.maxiumStenosisRca || ''}\nminimum stenosis in rca: ${bioData?.minimumStenosisRca || ''} \nplaque volume in rca:${bioData?.plaqueVolumeRca || ''} cubic mm\n\nlesions count in lmca: ${bioData?.lesionsCountLmca || ''}  \nmaximum stenosis in lmca : ${bioData?.maxiumStenosisLmca || ''}\nminimum stenosis in lmca: ${bioData?.minimumStenosisLmca || ''} \nplaque volume in lmca: ${bioData?.plaqueVolumeLmca || ''}cubic mm\n`
+      reportMutation.mutate(reportPrompt)
+
+      const doesDrinks = (bioData?.drink || '') === "Yes" ? 'does drinks' : 'does not drinks'
+      const hasStents = (bioData?.hasStents || '') === "Yes" ? 'have stents' : 'do not have any stents'
+      const hadHeartAttack = (bioData?.pastHeartAttack || '') === "Yes" ? 'had heart attack in past' : 'did not had heart attack in past'
+      const doesSmokes = (bioData?.smoke || '') === "Yes" ? 'does smokes' : 'does not smokes'
+      const doesAngina = (bioData?.pain || '') === "Yes" ? 'faces angina' : 'does not faces angina'
+      const treatmentPrompt = `my patient name ${bioData?.name || ''}, age ${bioData?.age || ''} have stenosis of ${bioData?.maxiumStenosisRca || ''} in RCA atery, and ${bioData?.maxiumStenosisLmca || ''} stenosis in LMCA artery, this patient ${hadHeartAttack} and ${hasStents},  ${doesDrinks} and ${doesSmokes} , ${doesAngina} while running, recommed medication and treatment plan for this. Mention the medication in detail with amount and routine`
+      treatementMutation.mutate(treatmentPrompt)
+    }
+  }, [bioData])
 
   useEffect(() => {
     if (reportMutation.isSuccess) {
@@ -73,7 +112,7 @@ const Report = () => {
             </div>
             <div>
               {
-                tab === 0 ? <PatientReport data={reportData} bioData={value?.[id || '']} loading={reportMutation.isLoading} /> : <TreatmentPlan data={treatmentData} loading={treatementMutation.isLoading} />
+                tab === 0 ? <PatientReport data={reportData} bioData={bioData} loading={reportMutation.isLoading} /> : <TreatmentPlan data={treatmentData} loading={treatementMutation.isLoading} />
               }
             </div>
           </Grid>

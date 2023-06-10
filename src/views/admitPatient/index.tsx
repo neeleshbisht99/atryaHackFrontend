@@ -67,7 +67,7 @@ const AdmitPatient = () => {
       setValue({ [newId]: stepData, ...value })
       setTimeout(() => {
         setIsUploading(false)
-        navigate(`/report/${newId}`);
+        navigate(`/patient/${newId}`);
       }, 8000)
     }
   };
@@ -236,7 +236,23 @@ const AdmitPatient = () => {
                        </Typography>
                         <Divider style={{ margin: '10px 0px 20px 0px' }} />
                         <div>
-                          <div style={{ display: 'flex' }}>
+                          <div style={{ display: 'flex', marginTop: '8px' }}>
+                            <TextField
+                              // id="outlined-hrs"
+                              label="Had heart attacks in the past ?"
+                              value={stepData?.pastHeartAttack}
+                              style={{ marginRight: '50px' }}
+                              onChange={(event: any) => { setStepData({ ...stepData, 'pastHeartAttack': event.target.value }) }}
+                            />
+                            <TextField
+                              // id="outlined-pulse"
+                              label="Has any Stent in any artery ?"
+                              value={stepData?.hasStents}
+                              style={{ marginRight: '50px' }}
+                              onChange={(event: any) => { setStepData({ ...stepData, 'hasStents': event.target.value }) }}
+                            />
+                          </div>
+                          <div style={{ display: 'flex', marginTop: '8px' }}>
                             <TextField
                               // id="outlined-medical"
                               label="Medical History"

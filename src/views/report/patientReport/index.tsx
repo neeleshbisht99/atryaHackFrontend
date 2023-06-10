@@ -129,7 +129,7 @@ const PatientReport = (props: any) => {
   } = classes
 
 
-  if (loading && !data) {
+  if (loading || !data) {
     return <Loader />
   }
   return (

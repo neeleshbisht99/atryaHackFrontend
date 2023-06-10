@@ -4,7 +4,7 @@ import Loader from 'src/ui-component/circularLoader'
 import HeaderNav from 'src/ui-component/headerNav'
 import SecondaryTab from './secondaryTab'
 import React, { useState } from 'react'
-import { Card, Grid, Paper, Typography } from '@mui/material'
+import { Button, Card, Grid, Paper, Typography } from '@mui/material'
 import { useTheme } from '@mui/material'
 import InfoDetails from './infoDetails/infoDetails'
 import InfoDetailsLesions from './infoDetailsLesions/infoDetails'
@@ -15,19 +15,20 @@ import { TABS } from './settings'
 import DetailCard from 'src/ui-component/cards/DetailCard'
 import Artery from 'src/assets/images/artery.png'
 import HEARTSVG from 'src/assets/images/HEART_IMG.png'
-
+import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
 const PatientDetails = () => {
     const theme = useTheme()
     const { classes } = useStyles()
     const headerNavProps = fnGetHeaderProps()
-
+    let navigate = useNavigate()
     const [viewTypes, setViewTypes] = useState([
         { id: '1', label: 'Analysis', value: 'Analysis' },
         { id: '2', label: 'Biology', value: 'Biology' }
     ])
-
-    const [activeViewType, setActiveViewType] = useState('1')
+    const { id } = useParams<any>()
+    const [activeViewType, setActiveViewType] = useState('2')
     const [currentTab, setCurrentTab] = useState({
         name: TABS[0].name
     })
@@ -67,6 +68,18 @@ const PatientDetails = () => {
                                             justifyContent: 'flex-end'
                                         }}
                                     >
+                                            <Button style={{
+                                                float: 'right',
+                                                padding: '8px 0',
+                                                width: '260px',
+                                                marginLeft: 10,
+                                                borderRadius: '0px'
+                                            }}
+                                                variant={'outlined'}
+                                                color="secondary" onClick={(e: any) => { navigate(`/report/${id}`) }}
+                                            >
+                                                Generate Report
+                                            </Button >
                                         <SecondaryTab
                                             taskTypes={viewTypes}
                                             activeTaskTypeTab={activeViewType}
