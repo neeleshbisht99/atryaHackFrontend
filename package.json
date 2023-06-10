@@ -13,11 +13,14 @@
     "@mui/system": "^5.8.6",
     "@mui/utils": "^5.8.6",
     "@mui/x-data-grid": "^6.5.0",
+    "@react-pdf/renderer": "^3.1.12",
     "@tabler/icons": "^1.72.0",
+    "@tanstack/react-query": "^4.29.12",
     "@types/jest": "^29.5.1",
     "@types/react": "^18.2.6",
     "@types/react-dom": "^18.2.4",
     "apexcharts": "^3.35.3",
+    "axios": "^1.4.0",
     "compressorjs": "^1.2.1",
     "fork-ts-checker-webpack-plugin": "^6.5.3",
     "formik": "^2.2.9",
@@ -36,6 +39,7 @@
     "redux": "^4.2.0",
     "tss-react": "^4.8.4",
     "typescript": "^5.0.4",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11"
   },
   "overrides": {
@@ -68,6 +72,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.4",
     "@types/node": "^20.2.1",
+    "@types/uuid": "^9.0.2",
     "immutable": "^4.3.0",
     "prettier": "^2.8.7",
     "sass": "^1.53.0"

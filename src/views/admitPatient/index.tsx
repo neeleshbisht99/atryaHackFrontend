@@ -5,11 +5,14 @@ import useStyles from './index.style'
 import MainCard from 'src/ui-component/cards/MainCard';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
-import { Step, StepContent } from '@mui/material';
+import { Step, StepContent, Backdrop } from '@mui/material';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CTUploadImages from './uploadImages/uploadImages'
+import FancyLoader from 'src/ui-component/fancyLoader'
+import { MainContext } from 'src/App'
+import { v4 as uuidv4 } from 'uuid';
 
 const steps = ['Fill Patient Data', 'Upload CCTA Scan Images', 'Symptoms'];
 
@@ -26,7 +29,7 @@ const AdmitPatient = () => {
     tablePaperRoot,
   } = classes
   let navigate = useNavigate()
-
+  const { value, setValue } = React.useContext(MainContext);
   const [tableFilterValue, setTableFilterValue] = useState({
     ...defaultFilterConfig,
     offset: 0,
@@ -36,9 +39,10 @@ const AdmitPatient = () => {
 
 
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isUploading, setIsUploading] = React.useState<any>(false);
   const [skipped, setSkipped] = React.useState(new Set<number>());
 
-  const [step1, setStep1] = React.useState<any>({});
+  const [stepData, setStepData] = React.useState<any>({});
 
   const isStepOptional = (step: number) => {
     return step === 1;
@@ -57,6 +61,15 @@ const AdmitPatient = () => {
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     setSkipped(newSkipped);
+    if (activeStep === 2) {
+      setIsUploading(true)
+      const newId = uuidv4();
+      setValue({ [newId]: stepData, ...value })
+      setTimeout(() => {
+        setIsUploading(false)
+        navigate(`/report/${newId}`);
+      }, 8000)
+    }
   };
 
   const handleBack = () => {
@@ -86,6 +99,18 @@ const AdmitPatient = () => {
 
   return (
     <MainCard title="Admit Patient">
+      {
+        isUploading ? (
+          <Backdrop open={true}
+            style={{
+              zIndex: 1501,
+            }}
+          >
+            <FancyLoader loaderText={'Sit back and relax, Processing Data....'} />
+          </Backdrop>
+        )
+          : ''
+      }
       <Card className={rootCard}>
         <Grid container className={container}>
           <Grid className={tablePaperRoot} item xs={12}>
@@ -131,23 +156,23 @@ const AdmitPatient = () => {
                           <TextField
                             key="outlined-name"
                             label="Name"
-                            value={step1?.name}
+                            value={stepData?.name}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'name': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'name': event.target.value }) }}
                           />
                           <TextField
                             key="outlined-age"
                             label="Age"
-                            value={step1?.age}
+                            value={stepData?.age}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'age': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'age': event.target.value }) }}
                           />
                           <TextField
                             key="outlined-weight"
                             label="Weight"
-                            value={step1?.weight}
+                            value={stepData?.weight}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'weight': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'weight': event.target.value }) }}
                           />
                         </div>
                         <Typography
@@ -161,46 +186,46 @@ const AdmitPatient = () => {
                           <TextField
                             // id="outlined-bp"
                             label="Blood Pressure"
-                            value={step1?.bp}
+                            value={stepData?.bp}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'bp': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'bp': event.target.value }) }}
                           />
                           <TextField
                             id="outlined-smoke"
                             label="Do you Smoke?"
-                            value={step1?.phone}
+                            value={stepData?.smoke}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'smoke': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'smoke': event.target.value }) }}
                           />
                           <TextField
                             // id="outlined-driknk"
                             label="Do you Drink?"
-                            value={step1?.info}
+                            value={stepData?.drink}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'drink': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'drink': event.target.value }) }}
                           />
                         </div>
                         <div style={{ display: 'flex', marginTop: '8px' }}>
                           <TextField
                             // id="outlined-hrs"
                             label="Exercise Hours"
-                            value={step1?.exerciseHrs}
+                            value={stepData?.exerciseHrs}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'exerciseHrs': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'exerciseHrs': event.target.value }) }}
                           />
                           <TextField
                             // id="outlined-pulse"
                             label="Pulse Rate"
-                            value={step1?.info}
+                            value={stepData?.pulse}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'pulse': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'pulse': event.target.value }) }}
                           />
                           <TextField
                             // id="outlined-level"
                             label="Glucose Level"
-                            value={step1?.info}
+                            value={stepData?.glucose}
                             style={{ marginRight: '50px' }}
-                            onChange={(event: any) => { setStep1({ ...step1, 'glucose': event.target.value }) }}
+                            onChange={(event: any) => { setStepData({ ...stepData, 'glucose': event.target.value }) }}
                           />
                         </div>
                         <Typography
@@ -215,33 +240,33 @@ const AdmitPatient = () => {
                             <TextField
                               // id="outlined-medical"
                               label="Medical History"
-                              value={step1?.history}
+                              value={stepData?.history}
                               multiline
                               rows={5}
                               style={{ width: '100%' }}
-                              onChange={(event: any) => { setStep1({ ...step1, 'history': event.target.value }) }}
+                              onChange={(event: any) => { setStepData({ ...stepData, 'history': event.target.value }) }}
                             />
                           </div>
                           <div style={{ display: 'flex', marginTop: '10px' }}>
                             <TextField
                               // id="outlined-medical"
                               label="Current List of Medication you take"
-                              value={step1?.history}
+                              value={stepData?.medication}
                               multiline
                               rows={5}
                               style={{ width: '100%' }}
-                              onChange={(event: any) => { setStep1({ ...step1, 'routines': event.target.value }) }}
+                              onChange={(event: any) => { setStepData({ ...stepData, 'medication': event.target.value }) }}
                             />
                           </div>
                           <div style={{ display: 'flex', marginTop: '10px' }}>
                             <TextField
                               // id="outlined-medical"
                               label="Exercise Routines and Dietary Patterns"
-                              value={step1?.history}
+                              value={stepData?.diet}
                               multiline
                               rows={5}
                               style={{ width: '100%' }}
-                              onChange={(event: any) => { setStep1({ ...step1, 'routines': event.target.value }) }}
+                              onChange={(event: any) => { setStepData({ ...stepData, 'diet': event.target.value }) }}
                             />
                           </div>
                         </div>
@@ -257,11 +282,88 @@ const AdmitPatient = () => {
                           {/* <Typography variant="body1">Upload CCTA Scan Images</Typography> */}
                         </Grid>
                         <Grid item xs={12}>
-                          <CTUploadImages data={step1.image} onUpdate={(obj: any) => setStep1({ ...step1, 'image': obj })} />
+                            <CTUploadImages data={stepData.image} onUpdate={(obj: any) => setStepData({ ...stepData, 'image': obj })} />
                         </Grid>
                       </Grid>
 
-                    </>) : ''
+                      </>) : (
+                        <>
+                          <div style={{ padding: '20px 0px' }}>
+                            <Typography
+                              variant="h5"
+                              style={{ fontWeight: 700, }}
+                            >
+                              Current symptoms
+                            </Typography>
+                            <Divider style={{ margin: '10px 0px 20px 0px' }} />
+                            <div style={{ display: 'flex', }}>
+                              <TextField
+                                key="outlined-name"
+                                label="Chest Pain/Angina"
+                                value={stepData?.pain}
+                                style={{ marginRight: '50px' }}
+                                onChange={(event: any) => { setStepData({ ...stepData, 'pain': event.target.value }) }}
+                              />
+                              <TextField
+                                key="outlined-age"
+                                label="Shortness of Breadth"
+                                value={stepData?.shortness}
+                                style={{ marginRight: '50px' }}
+                                onChange={(event: any) => { setStepData({ ...stepData, 'shortness': event.target.value }) }}
+                              />
+                              <TextField
+                                key="outlined-weight"
+                                label="Fatigue"
+                                value={stepData?.fatigue}
+                                style={{ marginRight: '50px' }}
+                                onChange={(event: any) => { setStepData({ ...stepData, 'fatigue': event.target.value }) }}
+                              />
+                            </div>
+                            <Typography
+                              variant="h5"
+                              style={{ fontWeight: 700, marginTop: '30px' }}
+                            >
+                              Diagnostic test results
+                       </Typography>
+                            <Divider style={{ margin: '10px 0px 20px 0px' }} />
+                            <div>
+                              <div style={{ display: 'flex' }}>
+                                <TextField
+                                  // id="outlined-medical"
+                                  label="ECG results"
+                                  value={stepData?.ecg}
+                                  multiline
+                                  rows={5}
+                                  style={{ width: '100%' }}
+                                  onChange={(event: any) => { setStepData({ ...stepData, 'ecg': event.target.value }) }}
+                                />
+                              </div>
+                              <div style={{ display: 'flex', marginTop: '10px' }}>
+                                <TextField
+                                  // id="outlined-medical"
+                                  label="Stress Tests"
+                                  value={stepData?.stressTests}
+                                  multiline
+                                  rows={5}
+                                  style={{ width: '100%' }}
+                                  onChange={(event: any) => { setStepData({ ...stepData, 'stressTests': event.target.value }) }}
+                                />
+                              </div>
+                              <div style={{ display: 'flex', marginTop: '10px' }}>
+                                <TextField
+                                  // id="outlined-medical"
+                                  label="Cardiac Catheterization"
+                                  value={stepData?.cath}
+                                  multiline
+                                  rows={5}
+                                  style={{ width: '100%' }}
+                                  onChange={(event: any) => { setStepData({ ...stepData, 'cath': event.target.value }) }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </>
+                      )
                   )
                 }
               </Card>

@@ -14,6 +14,7 @@ const AdmitPatient = Loadable(lazy(() => import('src/views/admitPatient')));
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('src/views/dashboard/Default')));
 
+const Report = Loadable(lazy(() => import('src/views/report')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('src/views/utilities/Typography')));
@@ -46,6 +47,10 @@ const MainRoutes = {
     {
       path: '/dashboard',
       element: <DashboardDefault />
+    },
+    {
+      path: '/report/:id',
+      element: <Report />
     },
     {
       path: 'utils',
