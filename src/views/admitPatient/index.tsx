@@ -51,6 +51,51 @@ const AdmitPatient = () => {
   const isStepSkipped = (step: number) => {
     return skipped.has(step);
   };
+  function getRandomInt(min: any, max: any) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const generateCCTAData = () => {
+
+    const cadRad = getRandomInt(0, 5);
+    const calcium = getRandomInt(50, 300);
+
+    const lesionsCountRca = getRandomInt(1, 4);
+    const maxiumStenosisRca = `${getRandomInt(50, 80)}%`;
+    const minimumStenosisRca = `${getRandomInt(5, 20)}%`;
+    const plaqueVolumeRca = getRandomInt(50, 150);
+
+    const lesionsCountLmca = getRandomInt(1, 4);
+    const maxiumStenosisLmca = getRandomInt(50, 80);
+    const minimumStenosisLmca = getRandomInt(5, 20);
+    const plaqueVolumeLmca = getRandomInt(50, 150);
+
+    const stenosisCount = lesionsCountRca + lesionsCountLmca
+    const maximumStenosis = maxiumStenosisRca > maxiumStenosisLmca ? maxiumStenosisRca : maxiumStenosisLmca
+    const totalPlaqueVolume = plaqueVolumeRca + plaqueVolumeLmca;
+    const severeStenosis = getRandomInt(1, stenosisCount);
+    const moderateStenosis = stenosisCount - severeStenosis
+
+    return {
+      lesionsCountRca: lesionsCountRca,
+      maxiumStenosisRca: `${maxiumStenosisRca}%`,
+      minimumStenosisRca: `${minimumStenosisRca}%`,
+      plaqueVolumeRca: plaqueVolumeRca,
+      lesionsCountLmca: lesionsCountLmca,
+      maxiumStenosisLmca: `${maxiumStenosisLmca}%`,
+      minimumStenosisLmca: `${minimumStenosisLmca}%`,
+      plaqueVolumeLmca: plaqueVolumeLmca,
+      stenosisCount: stenosisCount,
+      maximumStenosis: maximumStenosis,
+      totalPlaqueVolume: totalPlaqueVolume,
+      severeStenosis: severeStenosis,
+      moderateStenosis: moderateStenosis,
+      cadRad: cadRad,
+      calcium: calcium
+    }
+  }
 
   const handleNext = () => {
     let newSkipped = skipped;
@@ -64,7 +109,8 @@ const AdmitPatient = () => {
     if (activeStep === 2) {
       setIsUploading(true)
       const newId = uuidv4();
-      setValue({ [newId]: stepData, ...value })
+      const cctaResults = generateCCTAData()
+      setValue({ [newId]: { ...stepData, ...cctaResults }, ...value })
       setTimeout(() => {
         setIsUploading(false)
         navigate(`/patient/${newId}`);

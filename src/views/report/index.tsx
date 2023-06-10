@@ -43,11 +43,30 @@ const Report = () => {
    * age -
    *
    *
+   *
+   *
 cadRad:
 calcium:
+
+stenosisCount -> add lesion count
+maximumStenosis -> max of both
+ severeStenosis -> random  **
+  moderateStenosis -> stenosisCount - severeStenosis **
+  totalPlaqueVolume -> add totalPlaqueVolume
+
+  lesionsCountRca -> segment anything
+  maxiumStenosisRca -> create a random between 50 - 80
+  minimumStenosisRca -> create random between 5 - 20
+  plaqueVolumeRca: -> creata random plauq volumne 50 -150
+
+  lesionsCountLmca -> segment anything
+  maxiumStenosisLmca-> create a random between 50 - 80
+  minimumStenosisLmca-> create random between 5 - 20
+  plaqueVolumeLmca:-> creata random plauq volumne 50 -150
+
   stenosisCount:
   maximumStenosis:
-  percentAtheromaVolume
+  percentAtheromaVolume --
   totalPlaqueVolume:
   severeStenosis
   moderateStenosis
