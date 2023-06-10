@@ -1,0 +1,75 @@
+{
+  "name": "aterya-web",
+  "version": "3.3.2",
+  "private": true,
+  "dependencies": {
+    "@ag-grid-community/react": "^29.3.5",
+    "@emotion/cache": "^11.9.3",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/icons-material": "^5.8.4",
+    "@mui/lab": "^5.0.0-alpha.88",
+    "@mui/material": "^5.8.6",
+    "@mui/system": "^5.8.6",
+    "@mui/utils": "^5.8.6",
+    "@mui/x-data-grid": "^6.5.0",
+    "@tabler/icons": "^1.72.0",
+    "@types/jest": "^29.5.1",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "apexcharts": "^3.35.3",
+    "compressorjs": "^1.2.1",
+    "fork-ts-checker-webpack-plugin": "^6.5.3",
+    "formik": "^2.2.9",
+    "framer-motion": "^10.0.0",
+    "material-ui-popup-state": "^4.0.1",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
+    "react-device-detect": "^2.2.2",
+    "react-dom": "^18.2.0",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-redux": "^8.0.2",
+    "react-router": "6.3.0",
+    "react-router-dom": "6.3.0",
+    "react-scripts": "^5.0.1",
+    "redux": "^4.2.0",
+    "tss-react": "^4.8.4",
+    "typescript": "^5.0.4",
+    "yup": "^0.32.11"
+  },
+  "overrides": {
+    "react-scripts": {
+      "typescript": "^5"
+    }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      "defaults",
+      "not IE 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@types/node": "^20.2.1",
+    "immutable": "^4.3.0",
+    "prettier": "^2.8.7",
+    "sass": "^1.53.0"
+  }
+}

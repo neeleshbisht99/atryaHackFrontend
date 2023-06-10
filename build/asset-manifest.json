@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.df3b6d63.css",
+    "main.js": "/static/js/main.f0fa0969.js",
+    "static/js/810.e70d6673.chunk.js": "/static/js/810.e70d6673.chunk.js",
+    "static/js/198.1cccc93d.chunk.js": "/static/js/198.1cccc93d.chunk.js",
+    "static/js/123.1264fe8f.chunk.js": "/static/js/123.1264fe8f.chunk.js",
+    "static/js/310.c4ead91d.chunk.js": "/static/js/310.c4ead91d.chunk.js",
+    "static/js/570.3a9b4290.chunk.js": "/static/js/570.3a9b4290.chunk.js",
+    "static/js/406.966955cb.chunk.js": "/static/js/406.966955cb.chunk.js",
+    "static/js/569.9669d064.chunk.js": "/static/js/569.9669d064.chunk.js",
+    "static/js/373.00e6a2a6.chunk.js": "/static/js/373.00e6a2a6.chunk.js",
+    "static/js/533.aa570e31.chunk.js": "/static/js/533.aa570e31.chunk.js",
+    "static/js/422.069adb57.chunk.js": "/static/js/422.069adb57.chunk.js",
+    "static/js/986.ce25afd1.chunk.js": "/static/js/986.ce25afd1.chunk.js",
+    "static/js/266.8cd77d49.chunk.js": "/static/js/266.8cd77d49.chunk.js",
+    "static/js/336.1b853423.chunk.js": "/static/js/336.1b853423.chunk.js",
+    "static/js/697.c62df2b4.chunk.js": "/static/js/697.c62df2b4.chunk.js",
+    "static/js/461.a9e29c0f.chunk.js": "/static/js/461.a9e29c0f.chunk.js",
+    "static/js/862.b6def598.chunk.js": "/static/js/862.b6def598.chunk.js",
+    "static/js/963.3c020f70.chunk.js": "/static/js/963.3c020f70.chunk.js",
+    "static/media/HEART_IMG.png": "/static/media/HEART_IMG.ff686c0007836ed7e625.png",
+    "static/media/user-round.svg": "/static/media/user-round.13b5a31bebd2cc6016d6db2cac8e92d1.svg",
+    "static/media/artery.png": "/static/media/artery.04eec9f9f5421979e86a.png",
+    "static/media/hridayaTransparent.png": "/static/media/hridayaTransparent.6f2e4aa2459d35650d9a.png",
+    "static/media/logo.svg": "/static/media/logo.1e00b36b1fa03c3a7bcb448039c8cabf.svg",
+    "index.html": "/index.html",
+    "static/media/social-google.svg": "/static/media/social-google.9887eb8eb43729cb99f402cfa0de3c44.svg",
+    "static/media/earning.svg": "/static/media/earning.b019e86a7ee117bd6bb2e8cab90c0db5.svg"
+  },
+  "entrypoints": [
+    "static/css/main.df3b6d63.css",
+    "static/js/main.f0fa0969.js"
+  ]
+}
