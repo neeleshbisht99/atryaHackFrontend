@@ -88,7 +88,8 @@ maximumStenosis -> max of both
 
   useEffect(() => {
     if (bioData) {
-      const reportPrompt = `\ngenerate a real world well detailed CCTA report from these findings of a person  name ${bioData?.name || ''}, age ${bioData?.age || ''} \ntotal plaque Volume: ${bioData?.totalPlaqueVolume || ''}cubic-mm\npercent atheroma volume : ${bioData?.percentAtheromaVolume || ''}\nsevere stenosis: ${bioData?.severeStenosis || ''}  \nmoderate stenosis: ${bioData?.moderateStenosis || ''} \ncad rad score: ${bioData?.cadRad || ''} \n\nlesions count in rca: ${bioData?.lesionsCountRca || ''}  \nmaximum stenosis in rca : ${bioData?.maxiumStenosisRca || ''}\nminimum stenosis in rca: ${bioData?.minimumStenosisRca || ''} \nplaque volume in rca:${bioData?.plaqueVolumeRca || ''} cubic mm\n\nlesions count in lmca: ${bioData?.lesionsCountLmca || ''}  \nmaximum stenosis in lmca : ${bioData?.maxiumStenosisLmca || ''}\nminimum stenosis in lmca: ${bioData?.minimumStenosisLmca || ''} \nplaque volume in lmca: ${bioData?.plaqueVolumeLmca || ''}cubic mm\n`
+      const medicalHistory = (bioData?.history || '')?.length ? `has medical disease history as following: ${bioData?.history}` : `has no Medical diease history`
+      const reportPrompt = `\nGenerate a real world well detailed CCTA report from these findings of a patient  name ${bioData?.name || ''}, age ${bioData?.age || ''} and ${medicalHistory}. \nTotal plaque Volume: ${bioData?.totalPlaqueVolume || ''}cubic-mm\npercent atheroma volume : ${bioData?.percentAtheromaVolume || ''}\nsevere stenosis: ${bioData?.severeStenosis || ''}  \nmoderate stenosis: ${bioData?.moderateStenosis || ''} \ncad rad score: ${bioData?.cadRad || ''} \n\nlesions count in rca: ${bioData?.lesionsCountRca || ''}  \nmaximum stenosis in rca : ${bioData?.maxiumStenosisRca || ''}\nminimum stenosis in rca: ${bioData?.minimumStenosisRca || ''} \nplaque volume in rca:${bioData?.plaqueVolumeRca || ''} cubic mm\n\nlesions count in lmca: ${bioData?.lesionsCountLmca || ''}  \nmaximum stenosis in lmca : ${bioData?.maxiumStenosisLmca || ''}\nminimum stenosis in lmca: ${bioData?.minimumStenosisLmca || ''} \nplaque volume in lmca: ${bioData?.plaqueVolumeLmca || ''}cubic mm\n`
       reportMutation.mutate(reportPrompt)
 
       const doesDrinks = (bioData?.drink || '') === "Yes" ? 'does drinks' : 'does not drinks'
@@ -96,7 +97,8 @@ maximumStenosis -> max of both
       const hadHeartAttack = (bioData?.pastHeartAttack || '') === "Yes" ? 'had heart attack in past' : 'did not had heart attack in past'
       const doesSmokes = (bioData?.smoke || '') === "Yes" ? 'does smokes' : 'does not smokes'
       const doesAngina = (bioData?.pain || '') === "Yes" ? 'faces angina' : 'does not faces angina'
-      const treatmentPrompt = `my patient name ${bioData?.name || ''}, age ${bioData?.age || ''} have stenosis of ${bioData?.maxiumStenosisRca || ''} in RCA atery, and ${bioData?.maxiumStenosisLmca || ''} stenosis in LMCA artery, this patient ${hadHeartAttack} and ${hasStents},  ${doesDrinks} and ${doesSmokes} , ${doesAngina} while running, recommed medication and treatment plan for this. Mention the medication in detail with amount and routine`
+
+      const treatmentPrompt = `Following are a patient details: name ${bioData?.name || ''}, age ${bioData?.age || ''}, ${medicalHistory}. Have stenosis of ${bioData?.maxiumStenosisRca || ''} in RCA atery, and ${bioData?.maxiumStenosisLmca || ''} stenosis in LMCA artery, this patient ${hadHeartAttack} and ${hasStents},  ${doesDrinks} and ${doesSmokes} , ${doesAngina} while running. Recommed medication and treatment plan for him. Mention the medication in detail with amount and routine.`
       treatementMutation.mutate(treatmentPrompt)
     }
   }, [bioData])
