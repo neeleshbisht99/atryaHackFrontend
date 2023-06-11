@@ -29,3 +29,4 @@ lerna-debug.log
 
 # idea
 .idea/
+.DS_Store
