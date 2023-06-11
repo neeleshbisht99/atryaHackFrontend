@@ -119,7 +119,7 @@ maximumStenosis -> max of both
 
   const [tab, setTab] = useState<any>(0)
   return (
-    <MainCard title="Patient List">
+    <MainCard title="Report & Treatment Plan">
       <Card className={rootCard}>
         <Grid container className={container}>
           <Grid className={tablePaperRoot} item xs={12}>
